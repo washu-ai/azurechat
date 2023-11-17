@@ -40,6 +40,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 170 90% 29%;
+    --ring: 359 78% 36%;
     --radius: 0.5rem;
   }
 
@@ -48,13 +49,7 @@
 
     --foreground: 0 0% 98%;
 
-
-    --card: 240 10% 3.9%;
-    --card: 0, 0%, 41%;
-    --card:  180, 3%, 44%;
     --card: 0 0% 24%;
-
-    --card-foreground: 0 0% 98%;
     --card-foreground: 0 0% 93%;
 
     --popover: 240 10% 3.9%;
@@ -66,8 +61,6 @@
     --primary-foreground: 240 5.9% 10%;
     --primary-foreground: 0 0 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary: 0 0% 24%;
     --secondary: 180, 3%, 44%;
     --secondary-forground: 0 0% 93%;
 
@@ -77,13 +70,10 @@
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 93%;
-    --border:  359, 78%, 36%;
     --border: var(--secondary);
    
     --input: 240 10% 3.9%;
-    --ring: 169 74% 22%;
-    --ring: 359 78% 36%
+    --ring: 359 78% 36%;
   }
 }
 
@@ -120,16 +110,24 @@ span>img.w-full {
   bottom: -1px;
   font-size: 12pt;
   font-weight: bold;
-  right: 50%;
-  left: 50%;
-  width: max-content;
+  width: 100%;
+  text-align: center;
   white-space: nowrap;
   color: hsl(var(--secondary));
 }
 
+.dark .grid button{
+  border-color: hsl(var(--secondary));
+  border-width: 1px;
+}
+.dark h3 .text-primary{
+  
+  color: hsl(var(--primary-foreground));
+}
+
 /*Custom style for the welcome message*/
 
-.dark img[src="/ai-icon.png"] {
+.dark img[src*="ai-icon.png"] {
   margin: auto;
   content: url('/ai-icon-dark.png');
 }
@@ -157,6 +155,7 @@ span>img.w-full {
 .dark [role=tablist] button[aria-selected=true] {
   color: hsl(var(--card-foreground));
 }
+
 
 /* fix the color of the chat cards in dark mode */
 .dark h5 {
