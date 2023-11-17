@@ -1,4 +1,4 @@
-export const AI_NAME = "Washington University Chatbot (beta)";
+export const AI_NAME = "Washington University ChatGPT Beta";
 export let HOME_MESSAGE = `
 Please note that, like the public instance of ChatGPT, this tool should not currently be used with data protected under HIPAA or FERPA, or any other sensitive information.
  

@@ -47,7 +47,7 @@
     --background: 240 10% 3.9%;
 
     --foreground: 0 0% 98%;
-    --foreground: 359 78% 36%;
+
 
     --card: 240 10% 3.9%;
     --card: 0, 0%, 41%;
@@ -83,6 +83,7 @@
    
     --input: 240 10% 3.9%;
     --ring: 169 74% 22%;
+    --ring: 359 78% 36%
   }
 }
 
@@ -129,6 +130,7 @@ span>img.w-full {
 /*Custom style for the welcome message*/
 
 .dark img[src="/ai-icon.png"] {
+  margin: auto;
   content: url('/ai-icon-dark.png');
 }
 .dark .welcome-card h4 {
