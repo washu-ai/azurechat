@@ -9,5 +9,5 @@ The goal of creating this Beta instance of ChatGPT for the WashU community is to
 Please be aware that this Beta version has no content filters, such as for explicit words, and refrain from participating in any harmful or offensive activities. All user interactions are logged. Review the university's compliance policies for more information.  
 `;
 
-export const FEEDBACK_LINK = "https://wustl.edu/chatbot-feedback";
+export const FEEDBACK_LINK = "https://wustl.az1.qualtrics.com/jfe/form/SV_afchOhQSyBJHxPw";
 export const PROVIDED_BY_TEXT = "Provided by WashU Digital Transformation and WashU IT";
