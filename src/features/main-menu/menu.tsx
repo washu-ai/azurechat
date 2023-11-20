@@ -8,7 +8,8 @@ import {
   PanelLeftClose,
   PanelRightClose,
   Triangle, 
-  BookOpen
+  BookOpen,
+  ClipboardSignature
 } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "../theme/theme-toggle";
@@ -61,7 +62,7 @@ export const MainMenu = () => {
           variant={"outline"}
         >
           <Link href={FEEDBACK_LINK} target="_blank" title="feedback" className="relative">
-            <BookOpen />
+            <ClipboardSignature />
           </Link>
         </Button>
       </div>
