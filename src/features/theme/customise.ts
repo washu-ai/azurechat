@@ -10,5 +10,5 @@ All interactions are logged an linked to the user's WUSTL Key account.
 Learn more at <a href="it.wustl.edu/ai">it.wustl.edu/ai</a>.
 `;
 
-export const FEEDBACK_LINK = "https://wustl.edu/chatbot-feedback";
+export const FEEDBACK_LINK = "https://wustl.az1.qualtrics.com/jfe/form/SV_afchOhQSyBJHxPw";
 export const PROVIDED_BY_TEXT = "Provided by WashU Digital Transformation and WashU IT";
