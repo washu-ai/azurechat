@@ -1,13 +1,12 @@
 export const AI_NAME = "Washington University ChatGPT Beta";
 export let HOME_MESSAGE = `
-This fully secure sandbox is compliant for use with sensitive data, including information protected under HIPAA and FERPA.
-The Beta is not yet mobile-friendly.
-You may experience limited capacity or constraints on use.
-Feedback is desired via the sidebar menu.
+Please note that, like the public instance of ChatGPT, this tool should not currently be used with data protected under HIPAA or FERPA, or any other sensitive information.
+ 
 <br/><br/>
-Refrain from participating in harmful or offensive activities. See WashU <a target="_blank" href="https://wustl.edu/about/compliance-policies/">compliance policies</a> for more.
-All interactions are logged an linked to the user's WUSTL Key account.
-Learn more at <a href="it.wustl.edu/ai">it.wustl.edu/ai</a>.
+The goal of creating this Beta instance of ChatGPT for the WashU community is to establish a secure sandbox environment for approved research and operational purposes. We are testing and working towards a security review by December 2024 to provide a fully secure and compliant tool.
+
+<br/><br/>
+Please be aware that this Beta version has no content filters, such as for explicit words, and refrain from participating in any harmful or offensive activities. All user interactions are logged. Review the university's compliance policies for more information.  
 `;
 
 export const FEEDBACK_LINK = "https://wustl.edu/chatbot-feedback";
