@@ -17,11 +17,8 @@ export const StartNewChat: FC<Prop> = (props) => {
           {AI_NAME}
         </Typography>
         <div className="flex flex-col gap-2">
-          <p className="">
-            Welcome to {AI_NAME}. 
-          </p>
           <p dangerouslySetInnerHTML={{ __html: HOME_MESSAGE}}></p>
-          <p>You can start a new chat with me by clicking the button below.</p>
+          <p>Open a new prompt window by selecting the plus sign below.</p>
         </div>
         <div className="-mx-5 -mb-5 p-5 flex flex-col border-t bg-muted">
           <NewChat />
