@@ -2,11 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import {
+  History,
   LayoutDashboard,
   MessageCircle,
   PanelLeftClose,
   PanelRightClose,
-  Triangle,
+  Triangle, 
+  BookOpen,
+  ClipboardSignature
 } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "../theme/theme-toggle";
@@ -15,6 +18,7 @@ import { UserProfile } from "../user-profile";
 import { useSession } from "next-auth/react";
 import { UpdateIndicator } from "../change-log/update-indicator";
 import { useMenuContext } from "./menu-context";
+import { FEEDBACK_LINK } from "../theme/customise";
 
 export const MainMenu = () => {
   const { data: session } = useSession();
@@ -29,15 +33,7 @@ export const MainMenu = () => {
         >
           {isMenuOpen ? <PanelLeftClose /> : <PanelRightClose />}
         </Button>
-        <Button
-          asChild
-          className="rounded-full w-[40px] h-[40px] p-1 text-primary"
-          variant={"outline"}
-        >
-          <Link href="/" title="Home">
-            <img src="/ai-icon.png" />
-          </Link>
-        </Button>
+
         <Button
           asChild
           className="rounded-full w-[40px] h-[40px] p-2 text-primary"
@@ -65,9 +61,8 @@ export const MainMenu = () => {
           className="rounded-full w-[40px] h-[40px] p-2 text-primary"
           variant={"outline"}
         >
-          <Link href="/change-log" title="change log" className="relative">
-            <Triangle />
-            <UpdateIndicator />
+          <Link href={FEEDBACK_LINK} target="_blank" title="feedback" className="relative">
+            <ClipboardSignature />
           </Link>
         </Button>
       </div>
