@@ -17,7 +17,7 @@ param location string
     type: 'location'
   }
 })
-param openAILocation string
+param openAILocation string = 'northcentralus'
 
 param openAISku string = 'S0'
 param openAIApiVersion string = '2023-12-01-preview'
@@ -59,9 +59,12 @@ param searchServiceSkuName string = 'standard'
 param storageServiceSku object = { name: 'Standard_LRS' } 
 param storageServiceImageContainerName string = 'images'
 
-param resourceGroupName string = ''
+param envName string = 'dev'
+param resourceGroupName string = '${name}-${envName}-rg'
 
-var resourceToken = toLower(uniqueString(subscription().id, name, location))
+var resourceToken = envName
+// toLower(uniqueString(subscription().id, name, location))
+
 var tags = { 'azd-env-name': name }
 
 // Organize resources in a resource group

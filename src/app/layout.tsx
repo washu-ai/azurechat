@@ -1,4 +1,4 @@
-import { AI_NAME } from "@/features/theme/theme-config";
+import { AI_NAME, PROVIDED_BY_TEXT } from "@/features/theme/theme-config";
 import { ThemeProvider } from "@/features/theme/theme-provider";
 import { Toaster } from "@/features/ui/toaster";
 import { cn } from "@/ui/lib";
@@ -26,11 +26,12 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           {children}
+          <div className="powered-by"><small>{PROVIDED_BY_TEXT}</small></div>
           <Toaster />
         </ThemeProvider>
       </body>
