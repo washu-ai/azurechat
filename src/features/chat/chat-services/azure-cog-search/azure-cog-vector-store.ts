@@ -30,6 +30,13 @@ type AzureCogVectorField = {
   k: number;
 };
 
+type vectorQuery = {
+  kind: string;
+  vector: number[];
+  fields: string;
+  k: number;
+}
+
 type AzureCogFilter = {
   search?: string;
   facets?: string[];
@@ -41,7 +48,7 @@ type AzureCogRequestObject = {
   search: string;
   facets: string[];
   filter: string;
-  vectors: AzureCogVectorField[];
+  vectorQueries: vectorQuery[];
   top: number;
 };
 
@@ -56,7 +63,7 @@ export const simpleSearch = async (
     search: filter?.search || "*",
     facets: filter?.facets || [],
     filter: filter?.filter || "",
-    vectors: [],
+    vectorQueries: [],
     top: filter?.top || 10,
   };
 
@@ -90,8 +97,8 @@ export const similaritySearchVectorWithScore = async (
     search: filter?.search || "*",
     facets: filter?.facets || [],
     filter: filter?.filter || "",
-    vectors: [
-      { value: embeddings.data[0].embedding, fields: "embedding", k: k },
+    vectorQueries: [
+      { kind: "vector", vector: embeddings.data[0].embedding, fields: "embedding", k: k },
     ],
     top: filter?.top || k,
   };
