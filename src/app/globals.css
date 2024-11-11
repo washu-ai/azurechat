@@ -9,16 +9,18 @@
 
   :root {
     /** Wash U Colors */
-    --red: rgb(165, 20, 23);
+    --red: rgb(186, 12, 47);
     --gray: rgb(108, 115, 115);
     --gray-light: rgb(200, 200, 200);
     --gray-dark: rgb(61, 61, 61);
     --gray-extra-light: rgb(238, 238, 238);
+    --light-yellow: rgb(250, 247, 239);
 
     --gray: 180, 3%, 44%;
     --gray-dark: 0, 0%, 24%;
     --gray-extra-light: 0, 0%, 93%;
-    --red: 359, 78%, 36%;
+    --red: 348 88% 39%;
+    --light-yellow: 44, 52%, 96%;
     /** **/
 
     --background: 0 0% 100%;
@@ -27,10 +29,12 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 359 78% 36%;
+    --primary: 348 88% 39%;
     --primary-foreground: 0 0% 93%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
+    --tertiary: 44 52% 96%;
+    --highlighted: 40 71% 86%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
@@ -40,7 +44,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 170 90% 29%;
-    --ring: 359 78% 36%;
+    --ring: 348 88% 39%;
     --radius: 0.5rem;
   }
 
@@ -55,7 +59,7 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 169 74% 22%;
-    --primary: 359 78% 36%;
+    --primary: 348 88% 39%;
     --primary: 0 0% 24%;
 
     --primary-foreground: 240 5.9% 10%;
@@ -63,6 +67,9 @@
 
     --secondary: 180, 3%, 44%;
     --secondary-forground: 0 0% 93%;
+
+    --tertiary: 0 0% 24%;
+    --highlighted: 0 0% 24%;
 
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
@@ -73,7 +80,7 @@
     --border: var(--secondary);
 
     --input: 240 10% 3.9%;
-    --ring: 359 78% 36%;
+    --ring: 348 88% 39%;
   }
 }
 
@@ -95,6 +102,7 @@ Wash U CSS Overrides
 /*fix aspect ratio for shield */
 img,
 img.asepct-square {
+  margin: auto;
   aspect-ratio: 275/313 !important;
 }
 
