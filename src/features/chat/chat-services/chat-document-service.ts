@@ -1,6 +1,6 @@
 "use server";
 
-import { userHashedId } from "@/features/auth/helpers";
+import { userHashedId, userSession } from "@/features/auth/helpers";
 import { CosmosDBContainer } from "@/features/common/cosmos";
 
 import { uniqueId } from "@/features/common/util";
@@ -174,6 +174,7 @@ export const UpsertChatDocument = async (
     chatThreadId: chatThreadID,
     id: uniqueId(),
     userId: await userHashedId(),
+    email: (await userSession())!.email,
     createdAt: new Date(),
     type: CHAT_DOCUMENT_ATTRIBUTE,
     isDeleted: false,

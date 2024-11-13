@@ -27,6 +27,7 @@ export interface ChatThreadModel {
   createdAt: Date;
   userId: string;
   useName: string;
+  email: string;
   isDeleted: boolean;
   chatType: ChatType;
   conversationStyle: ConversationStyle;
@@ -48,6 +49,7 @@ export interface PromptGPTProps extends PromptGPTBody {
 export interface ChatDocumentModel {
   id: string;
   name: string;
+  email: string;
   chatThreadId: string;
   userId: string;
   isDeleted: boolean;

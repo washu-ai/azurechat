@@ -170,6 +170,7 @@ export const CreateChatThread = async () => {
   const modelToSave: ChatThreadModel = {
     name: "new chat",
     useName: (await userSession())!.name,
+    email: (await userSession())!.email,
     userId: await userHashedId(),
     id: uniqueId(),
     createdAt: new Date(),
