@@ -35,8 +35,11 @@ module.exports = {
         tertiary: {
           DEFAULT: "hsl(var(--tertiary))",
         },
-        highlighted: {
-          DEFAULT: "hsl(var(--highlighted))",
+        menuselected: {
+          DEFAULT: "hsl(var(--menuselected))",
+        },
+        menuhover: {
+          DEFAULT: "hsl(var(--menuhover))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
