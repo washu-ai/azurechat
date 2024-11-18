@@ -20,7 +20,10 @@
     --gray-dark: 0, 0%, 24%;
     --gray-extra-light: 0, 0%, 93%;
     --red: 348 88% 39%;
-    --light-yellow: 44, 52%, 96%;
+    --beige: 44, 52%, 96%; /* #FAF7EF; */
+
+    --dark-warm-gray: 35 13% 82%;  /* #D7D2CB */ 
+    --light-warm-gray: 45 25% 91%; /* #EDEAE1; */
     /** **/
 
     --background: 0 0% 100%;
@@ -33,8 +36,9 @@
     --primary-foreground: 0 0% 93%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --tertiary: 44 52% 96%;
-    --highlighted: 40 71% 86%;
+    --tertiary: var(--beige);
+    --menuselected: var(--dark-warm-gray);
+    --menuhover: var(--light-warm-gray);
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
@@ -69,7 +73,8 @@
     --secondary-forground: 0 0% 93%;
 
     --tertiary: 0 0% 24%;
-    --highlighted: 0 0% 24%;
+    --menuselected: 0 0% 24%;
+    --menuhover: 0 0% 14%;
 
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
