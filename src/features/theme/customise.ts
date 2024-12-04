@@ -10,4 +10,4 @@ Open a new prompt window by selecting the plus sign below.
 `;
 
 export const FEEDBACK_LINK = "mailto:aiquestions@wustl.edu?subject=gpt.wustl.edu%20Feedback";
-export const PROVIDED_BY_TEXT = "Provided by the DI<sup>2</sup> Accelerator and WashU IT";
+export const PROVIDED_BY_TEXT = "Provided by the DI² Accelerator and WashU IT";
