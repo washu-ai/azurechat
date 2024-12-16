@@ -18,7 +18,6 @@ export const StartNewChat: FC<Prop> = (props) => {
         </Typography>
         <div className="flex flex-col gap-2">
           <p dangerouslySetInnerHTML={{ __html: HOME_MESSAGE}}></p>
-          <p>Open a new prompt window by selecting the plus sign below.</p>
         </div>
         <div className="-mx-5 -mb-5 p-5 flex flex-col border-t bg-muted">
           <NewChat />
