@@ -32,6 +32,15 @@ module.exports = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+        },
+        menuselected: {
+          DEFAULT: "hsl(var(--menuselected))",
+        },
+        menuhover: {
+          DEFAULT: "hsl(var(--menuhover))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
