@@ -38,16 +38,10 @@ jobs:
       - name: 📂 Copy Public folder
         run: cp -R ./src/public ./site-deploy/public
 
-      - name: � Verify React files before packaging
-        run: |
-          echo "Checking for React CJS files..."
-          ls -la ./site-deploy/node_modules/react/cjs/ || echo "React CJS directory not found!"
-          ls -la ./site-deploy/node_modules/react-dom/cjs/ || echo "React-DOM CJS directory not found!"
-
       - name: 📦 Package Next application
         run: |
           cd ./site-deploy
-          zip -r Nextjs-site.zip . -x "*.git*"      
+          zip Nextjs-site.zip ./* .next -qr      
           
       - name: 🔍 Diagnostics
         run: |
@@ -56,7 +50,7 @@ jobs:
           ls ./site-deploy
 
       - name: ⬆️ Publish Next Application artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: Nextjs-site
           path: ./site-deploy/Nextjs-site.zip
@@ -69,7 +63,7 @@ jobs:
 
     steps:
       - name: ⬇️ Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: Nextjs-site
 
@@ -91,7 +85,7 @@ jobs:
           inlineScript: |
             rg=$(az webapp list --query "[?name=='${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }}'].resourceGroup" --output tsv)
             echo Setting SCM_DO_BUILD_DURING_DEPLOYMENT=false on app service ${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }}
-            az webapp config appsettings set -n ${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }} -g $rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false NODE_ENV=production -o none
+            az webapp config appsettings set -n ${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }} -g $rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false -o none
             echo Setting --startup-file=\"node server.js\" on app service ${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }}
             az webapp config set --startup-file="node server.js" -n ${{ vars.WUIT_AZURE_PROD_GPT_AZURE_APP_SERVICE_NAME }} -g $rg -o none
             sleep 10
