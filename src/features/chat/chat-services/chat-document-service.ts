@@ -7,6 +7,7 @@ import { uniqueId } from "@/features/common/util";
 import {
   AzureKeyCredential,
   DocumentAnalysisClient,
+  DocumentAnalysisClientOptions,
 } from "@azure/ai-form-recognizer";
 import { SqlQuerySpec } from "@azure/cosmos";
 import {
@@ -52,15 +53,23 @@ const LoadFile = async (formData: FormData) => {
     const file: File | null = formData.get("file") as unknown as File;
 
     if (file && file.size < MAX_DOCUMENT_SIZE) {
+      console.log(`Processing file: ${file.name}, size: ${file.size}, type: ${file.type}`);
+      
       const client = await initDocumentIntelligence();
+      console.log("Document Intelligence client initialized successfully");
 
       const blob = new Blob([file], { type: file.type });
+      const arrayBuffer = await blob.arrayBuffer();
+      console.log(`Array buffer created, size: ${arrayBuffer.byteLength}`);
 
+      console.log("Starting document analysis...");
       const poller = await client.beginAnalyzeDocument(
         "prebuilt-read",
-        await blob.arrayBuffer()
+        arrayBuffer
       );
+      console.log("Document analysis started, polling for results...");
       const { paragraphs } = await poller.pollUntilDone();
+      console.log(`Document analysis complete, found ${paragraphs?.length || 0} paragraphs`);
 
       const docs: Array<string> = [];
 
@@ -74,16 +83,30 @@ const LoadFile = async (formData: FormData) => {
     }
   } catch (e) {
     const error = e as any;
+    console.error("Error in LoadFile:", error);
+    console.error("Error stack:", error.stack);
+    console.error("Error cause:", error.cause);
 
     if (error.details) {
       if (error.details.length > 0) {
-        throw new Error(error.details[0].message);
+        throw new Error(`Document Intelligence Error: ${error.details[0].message}`);
       } else {
-        throw new Error(error.details.error.innererror.message);
+        throw new Error(`Document Intelligence Error: ${error.details.error?.innererror?.message || error.message}`);
       }
     }
 
-    throw new Error(error.message);
+    // Provide more helpful error message for fetch failures
+    if (error.message?.includes("fetch failed") || error.cause?.code) {
+      throw new Error(
+        `Failed to connect to Azure Document Intelligence service. ` +
+        `Error: ${error.message}. ` +
+        `Cause: ${error.cause?.message || 'Unknown'}. ` +
+        `Code: ${error.cause?.code || 'N/A'}. ` +
+        `Please check your endpoint URL and network configuration.`
+      );
+    }
+
+    throw new Error(`Document processing error: ${error.message}`);
   }
 
   throw new Error("Invalid file format or size. Only PDF files are supported.");
@@ -129,9 +152,30 @@ export const IndexDocuments = async (
 };
 
 export const initDocumentIntelligence = async () => {
+  const endpoint = process.env.AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT;
+  const key = process.env.AZURE_DOCUMENT_INTELLIGENCE_KEY;
+
+  if (!endpoint || !key) {
+    throw new Error("Azure Document Intelligence endpoint or key is not configured");
+  }
+
+  // Ensure endpoint has proper format
+  const formattedEndpoint = endpoint.endsWith('/') ? endpoint.slice(0, -1) : endpoint;
+
+  const options: DocumentAnalysisClientOptions = {
+    // Add retry options and logging for better debugging
+    retryOptions: {
+      maxRetries: 3,
+      retryDelayInMs: 1000,
+    },
+    // This helps with Node.js 22 compatibility
+    allowInsecureConnection: false,
+  };
+
   const client = new DocumentAnalysisClient(
-    process.env.AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT,
-    new AzureKeyCredential(process.env.AZURE_DOCUMENT_INTELLIGENCE_KEY)
+    formattedEndpoint,
+    new AzureKeyCredential(key),
+    options
   );
 
   return client;

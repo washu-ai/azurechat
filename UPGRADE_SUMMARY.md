@@ -89,6 +89,30 @@ All server actions must be async in Next.js 15:
 ### 7. PostCSS Configuration
 - `postcss.config.js` - Kept using standard `tailwindcss` plugin (no changes needed after downgrade)
 
+### 8. Node.js 22 Fetch Compatibility Fixes
+
+#### Document Upload Service
+- Enhanced `initDocumentIntelligence` function with better configuration:
+  - Added endpoint URL validation and formatting
+  - Added retry options for resilience
+  - Added proper error validation
+  
+- Improved error handling with detailed logging:
+  - Added console logs throughout the document processing pipeline
+  - Enhanced error messages for fetch failures
+  - Added specific handling for TLS/network errors
+  
+#### Next.js Configuration  
+- Added `serverExternalPackages` to `next.config.js`:
+  - Prevents Next.js from bundling Azure SDK packages
+  - Allows Azure packages to use native Node.js fetch properly
+  - Includes: @azure/ai-form-recognizer, @azure/core-rest-pipeline, @azure/core-client, @azure/identity, @azure/cosmos
+
+#### Troubleshooting Documentation
+- Created `TROUBLESHOOTING_NODE22_FETCH.md` with comprehensive debugging steps
+- Includes solutions for both local development and Azure deployment
+- Covers TLS configuration, network settings, and logging
+
 ## Build Verification
 ✅ Build successful with Next.js 15.5.5
 ✅ All TypeScript type checking passed
