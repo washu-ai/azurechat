@@ -38,10 +38,16 @@ jobs:
       - name: 📂 Copy Public folder
         run: cp -R ./src/public ./site-deploy/public
 
+      - name: � Verify React files before packaging
+        run: |
+          echo "Checking for React CJS files..."
+          ls -la ./site-deploy/node_modules/react/cjs/ || echo "React CJS directory not found!"
+          ls -la ./site-deploy/node_modules/react-dom/cjs/ || echo "React-DOM CJS directory not found!"
+
       - name: 📦 Package Next application
         run: |
           cd ./site-deploy
-          zip Nextjs-site.zip ./* .next -qr      
+          zip -r Nextjs-site.zip . -x "*.git*"      
           
       - name: 🔍 Diagnostics
         run: |
