@@ -21,7 +21,8 @@ export const ChatAPISimple = async (props: PromptGPTProps) => {
   await chatHistory.addMessage({
     content: lastHumanMessage.content,
     role: "user",
-  });
+    refusal: null,
+  } as any);
 
   const history = await chatHistory.getMessages();
   const topHistory = history.slice(history.length - 30, history.length);
@@ -53,12 +54,13 @@ export const ChatAPISimple = async (props: PromptGPTProps) => {
       stream: true,
     });
 
-    const stream = OpenAIStream(response, {
+    const stream = OpenAIStream(response as any, {
       async onCompletion(completion) {
         await chatHistory.addMessage({
           content: completion,
           role: "assistant",
-        });
+          refusal: null,
+        } as any);
       },
     });
     return new StreamingTextResponse(stream);

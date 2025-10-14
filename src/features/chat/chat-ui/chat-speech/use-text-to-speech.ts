@@ -17,7 +17,7 @@ export interface TextToSpeechProps {
 
 export const useTextToSpeech = (): TextToSpeechProps => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const playerRef = useRef<SpeakerAudioDestination>();
+  const playerRef = useRef<SpeakerAudioDestination | undefined>(undefined);
 
   const { showError } = useGlobalMessageContext();
 

@@ -6,10 +6,11 @@ import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home({ params }: { params: { id: string } }) {
+export default async function Home({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const [items, thread] = await Promise.all([
-    FindAllChats(params.id),
-    FindChatThreadByID(params.id),
+    FindAllChats(id),
+    FindChatThreadByID(id),
   ]);
 
   if (thread.length === 0) {
@@ -17,7 +18,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   }
 
   return (
-    <ChatProvider id={params.id} chats={items} chatThread={thread[0]}>
+    <ChatProvider id={id} chats={items} chatThread={thread[0]}>
       <ChatUI />
     </ChatProvider>
   );
