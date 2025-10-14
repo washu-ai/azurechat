@@ -50,7 +50,7 @@ jobs:
           ls ./site-deploy
 
       - name: ⬆️ Publish Next Application artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Nextjs-site
           path: ./site-deploy/Nextjs-site.zip
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: ⬇️ Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Nextjs-site
 
