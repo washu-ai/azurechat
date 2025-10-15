@@ -5,7 +5,7 @@ import { RefObject, useEffect } from "react";
 
 export const useChatScrollAnchor = (
   chats: Message[],
-  ref: RefObject<HTMLDivElement>
+  ref: RefObject<HTMLDivElement | null>
 ) => {
   useEffect(() => {
     if (ref && ref.current) {

@@ -90,18 +90,20 @@ export const ChatAPIData = async (props: PromptGPTProps) => {
       stream: true,
     });
 
-    const stream = OpenAIStream(response, {
+    const stream = OpenAIStream(response as any, {
       async onCompletion(completion) {
         await chatHistory.addMessage({
           content: lastHumanMessage.content,
           role: "user",
-        });
+          refusal: null,
+        } as any);
 
         await chatHistory.addMessage(
           {
             content: completion,
             role: "assistant",
-          },
+            refusal: null,
+          } as any,
           context
         );
       },

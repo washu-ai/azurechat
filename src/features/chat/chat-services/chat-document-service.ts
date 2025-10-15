@@ -52,7 +52,7 @@ const LoadFile = async (formData: FormData) => {
     const file: File | null = formData.get("file") as unknown as File;
 
     if (file && file.size < MAX_DOCUMENT_SIZE) {
-      const client = initDocumentIntelligence();
+      const client = await initDocumentIntelligence();
 
       const blob = new Blob([file], { type: file.type });
 
@@ -128,7 +128,7 @@ export const IndexDocuments = async (
   }
 };
 
-export const initDocumentIntelligence = () => {
+export const initDocumentIntelligence = async () => {
   const client = new DocumentAnalysisClient(
     process.env.AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT,
     new AzureKeyCredential(process.env.AZURE_DOCUMENT_INTELLIGENCE_KEY)

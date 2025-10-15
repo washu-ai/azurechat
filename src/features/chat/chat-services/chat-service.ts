@@ -54,20 +54,20 @@ export const insertPromptAndResponse = async (
   assistantResponse: string
 ) => {
   await UpsertChat({
-    ...newChatModel(),
+    ...(await newChatModel()),
     content: userQuestion,
     threadId: threadID,
     role: "user",
   });
   await UpsertChat({
-    ...newChatModel(),
+    ...(await newChatModel()),
     content: assistantResponse,
     threadId: threadID,
     role: "assistant",
   });
 };
 
-export const newChatModel = (): ChatMessageModel => {
+export const newChatModel = async (): Promise<ChatMessageModel> => {
   return {
     content: "",
     threadId: "",

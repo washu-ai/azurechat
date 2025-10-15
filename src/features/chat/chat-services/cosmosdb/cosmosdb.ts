@@ -58,6 +58,7 @@ function mapOpenAIChatMessages(
     return {
       role: message.role,
       content: message.content,
-    };
+      refusal: null,
+    } as any;
   });
 }

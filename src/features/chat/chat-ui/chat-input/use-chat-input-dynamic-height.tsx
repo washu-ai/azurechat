@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface Props {
-  buttonRef: React.RefObject<HTMLButtonElement>;
+  buttonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 export const useChatInputDynamicHeight = (props: Props) => {

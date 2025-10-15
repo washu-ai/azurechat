@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const useSpeechToText = (props: Props): SpeechToTextProps => {
-  const recognizerRef = useRef<SpeechRecognizer>();
+  const recognizerRef = useRef<SpeechRecognizer | undefined>(undefined);
 
   const [isMicrophoneUsed, setIsMicrophoneUsed] = useState(false);
   const [isMicrophonePressed, setIsMicrophonePressed] = useState(false);

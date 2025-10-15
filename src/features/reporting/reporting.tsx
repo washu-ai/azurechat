@@ -13,15 +13,16 @@ import Link from "next/link";
 import { FindAllChatThreadsForReporting } from "./reporting-service";
 
 export type ReportingProp = {
-  searchParams: {
+  searchParams: Promise<{
     pageSize?: number;
     pageNumber?: number;
-  };
+  }>;
 };
 
 export const Reporting = async (props: ReportingProp) => {
-  let _pageNumber = Number(props.searchParams.pageNumber ?? 0);
-  let pageSize = Number(props.searchParams.pageSize ?? 5);
+  const searchParams = await props.searchParams;
+  let _pageNumber = Number(searchParams.pageNumber ?? 0);
+  let pageSize = Number(searchParams.pageSize ?? 5);
   let pageNumber = _pageNumber < 0 ? 0 : _pageNumber;
   let nextPage = Number(pageNumber) + 1;
   let previousPage = Number(pageNumber) - 1;
