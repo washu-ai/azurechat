@@ -1,14 +1,45 @@
 # Troubleshooting Document Upload Issues with Node.js 22
 
-## Issue
+## ⚠️ Critical Issue
 When uploading documents in Azure Chat on Node.js 22, you may encounter:
 ```
 TypeError: fetch failed
     at node:internal/deps/undici/undici:13510:13
 ```
 
-## Root Cause
-Node.js 22 uses a newer version of the undici library for fetch operations, which has stricter TLS/SSL certificate validation and different behavior compared to Node.js 18.
+## 🔍 Root Cause
+Node.js 22 uses undici 6.21.x for native fetch operations, which has:
+1. **Stricter TLS/SSL certificate validation**
+2. **Different DNS resolution behavior** (IPv6 preferred by default)
+3. **Changes in how HTTP/2 connections are handled**
+
+These changes can cause connectivity issues with Azure services, especially Azure Document Intelligence.
+
+## ✅ Quick Fixes (Try These First)
+
+### For Azure App Service:
+Add this Application Setting in Azure Portal:
+```
+NODE_OPTIONS = --dns-result-order=ipv4first
+```
+
+Or via Azure CLI:
+```bash
+az webapp config appsettings set \
+  --name <your-app-name> \
+  --resource-group <your-rg> \
+  --settings NODE_OPTIONS="--dns-result-order=ipv4first"
+```
+
+**Restart the App Service after adding this setting.**
+
+### For Local Development:
+Add to your `.env` file or set as environment variable:
+```bash
+export NODE_OPTIONS="--dns-result-order=ipv4first"
+```
+
+Then restart your development server.
 
 ## Solutions Implemented
 
@@ -61,15 +92,21 @@ In Azure Portal → App Service → Configuration → General settings:
 - HTTPS Only: On
 
 #### 6. Node.js Specific Settings
-If running in Azure App Service, you can add these app settings to help with debugging:
+If running in Azure App Service, you can add these app settings to help with debugging and compatibility:
 
 ```bash
 # Enable Node.js fetch debugging
 NODE_DEBUG=http,https,net,tls
 
+# Set DNS resolution order (helps with IPv6/IPv4 issues)
+NODE_OPTIONS=--dns-result-order=ipv4first
+
 # Or use Azure CLI:
-az webapp config appsettings set --name <app-name> --resource-group <rg-name> --settings NODE_DEBUG=http,https,net,tls
+az webapp config appsettings set --name <app-name> --resource-group <rg-name> \
+  --settings NODE_DEBUG=http,https,net,tls NODE_OPTIONS=--dns-result-order=ipv4first
 ```
+
+**Important:** The `NODE_OPTIONS=--dns-result-order=ipv4first` setting can resolve many fetch issues with Azure services in Node.js 22.
 
 ### Local Development Issues
 

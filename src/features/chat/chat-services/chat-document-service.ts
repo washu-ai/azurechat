@@ -10,6 +10,7 @@ import {
   DocumentAnalysisClientOptions,
 } from "@azure/ai-form-recognizer";
 import { SqlQuerySpec } from "@azure/cosmos";
+import { getAzureClientOptions } from "@/features/common/azure-http-client";
 import {
   AzureCogDocumentIndex,
   ensureIndexIsCreated,
@@ -58,14 +59,18 @@ const LoadFile = async (formData: FormData) => {
       const client = await initDocumentIntelligence();
       console.log("Document Intelligence client initialized successfully");
 
-      const blob = new Blob([file], { type: file.type });
-      const arrayBuffer = await blob.arrayBuffer();
+      // Convert file to buffer - this is more compatible with Node.js 22
+      const arrayBuffer = await file.arrayBuffer();
       console.log(`Array buffer created, size: ${arrayBuffer.byteLength}`);
+
+      // Create a Buffer from ArrayBuffer for better Node.js compatibility
+      const buffer = Buffer.from(arrayBuffer);
+      console.log(`Buffer created, size: ${buffer.length}`);
 
       console.log("Starting document analysis...");
       const poller = await client.beginAnalyzeDocument(
         "prebuilt-read",
-        arrayBuffer
+        buffer
       );
       console.log("Document analysis started, polling for results...");
       const { paragraphs } = await poller.pollUntilDone();
@@ -162,15 +167,12 @@ export const initDocumentIntelligence = async () => {
   // Ensure endpoint has proper format
   const formattedEndpoint = endpoint.endsWith('/') ? endpoint.slice(0, -1) : endpoint;
 
+  // Use custom options for Node.js 22 compatibility
   const options: DocumentAnalysisClientOptions = {
-    // Add retry options and logging for better debugging
-    retryOptions: {
-      maxRetries: 3,
-      retryDelayInMs: 1000,
-    },
-    // This helps with Node.js 22 compatibility
-    allowInsecureConnection: false,
+    ...getAzureClientOptions(),
   };
+
+  console.log(`Initializing Document Intelligence client with endpoint: ${formattedEndpoint}`);
 
   const client = new DocumentAnalysisClient(
     formattedEndpoint,
