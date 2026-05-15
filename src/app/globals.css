@@ -214,3 +214,21 @@ span>img.w-full {
 .dark:prose-invert .bg-primary {
   background-color: hsl(var(--secondary));
 }
+
+@media print {
+  .bg-primary {
+    visibility: collapse !important;
+  }
+  .justify-center, .bottom-0, .powered-by {
+    display: none !important;
+  }
+  .bg-card {
+    visibility: visible !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    color: #000;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
