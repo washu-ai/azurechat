@@ -44,20 +44,20 @@ const ChatInput: FC<Props> = (props) => {
         <Textarea
           rows={rows}
           value={input}
-          placeholder="Send a message"
+          placeholder="This site is in read-only mode. New messages are disabled."
           className="min-h-fit bg-background shadow-sm resize-none py-4 pr-[80px]"
           onKeyUp={onKeyUp}
           onKeyDown={onKeyDown}
           onChange={onChange}
         ></Textarea>
         <div className="absolute right-0 bottom-0 px-8 flex items-end h-full mr-2 mb-4">
-          {speechEnabled && <Microphone disabled={isLoading} />}
+          {speechEnabled && <Microphone disabled={true} />}
           <Button
             size="icon"
             type="submit"
             variant={"ghost"}
             ref={buttonRef}
-            disabled={isLoading}
+            disabled={true}
           >
             {isLoading ? (
               <Loader className="animate-spin" size={16} />
