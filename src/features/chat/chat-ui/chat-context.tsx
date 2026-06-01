@@ -26,6 +26,7 @@ interface ChatContextProps extends UseChatHelpers {
   id: string;
   setChatBody: (body: PromptGPTBody) => void;
   chatBody: PromptGPTBody;
+  chatThreadName: string;
   fileState: FileState;
   onChatTypeChange: (value: ChatType) => void;
   onConversationStyleChange: (value: ConversationStyle) => void;
@@ -101,6 +102,7 @@ export const ChatProvider: FC<Prop> = (props) => {
         ...response,
         setChatBody,
         chatBody,
+        chatThreadName: props.chatThread.name,
         onChatTypeChange,
         onConversationStyleChange,
         fileState,
