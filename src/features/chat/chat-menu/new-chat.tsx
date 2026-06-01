@@ -24,6 +24,8 @@ export const NewChat = () => {
       className="gap-2 rounded-full w-[40px] h-[40px] p-1 text-primary"
       variant={"outline"}
       onClick={() => startNewChat()}
+      disabled
+      title="New chats are disabled — this site is in read-only mode"
     >
       <PlusCircle size={40} strokeWidth={1.2} />
     </Button>
